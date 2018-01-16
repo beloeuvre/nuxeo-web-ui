@@ -26,9 +26,12 @@ limitations under the License.
     <style>
     </style>
 
-    <nuxeo-operation id="tagOp" op="Services.TagDocument">
+    <nuxeo-operation id="tagOp"
+      op="Services.TagDocument"
+      input="[[document]]"
+      params='{"tags": ["bar", "foo"]}'>
     </nuxeo-operation>
-    <paper-icon-button noink id="tag" icon="icons:pets" on-tap="_tag">
+    <paper-icon-button id="tag" icon="icons:pets" on-tap="_tag">
     </paper-icon-button>
     <paper-tooltip>[[i18n('documentMyTagAction.tooltip')]]</paper-tooltip>
   </template>
@@ -47,8 +50,6 @@ limitations under the License.
       },
 
       _tag: function() {
-        this.$.tagOp.input = this.document;
-        this.$.tagOp.params = {"tags": ['bar', 'foo']};
         this.$.tagOp.execute().then(function() {
           // Display notification
           this.fire('notify', {
